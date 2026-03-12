@@ -6,7 +6,7 @@
 from playwright.sync_api import Page
 
 #import object model
-from ..pages.login_page import LoginPage
+from pages.login_page import LoginPage
 
 
 '''

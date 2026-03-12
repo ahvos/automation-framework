@@ -21,26 +21,20 @@ class LoginPage:
         self.flash_msg = page.locator("#flash")                     #flash message show after login attempt
 
 
-'''
-Function: opens login page within browser.
-'''
-def open_browser(self):
-    #go to url
-    self.page.goto("https://the-internet.herokuapp.com/login")
+    #opens login page within browser.
+    def open_browser(self):
+        #go to url
+        self.page.goto("https://the-internet.herokuapp.com/login")
 
 
-'''
-Function: get flash message shown after login attempt.
-'''
-def get_flash_msg(self):
-    #extract and return text within an element without HTML tags
-    return self.flash_msg.text_content()
+    #get flash message shown after login attempt.
+    def get_flash_msg(self):
+        #extract and return text within an element without HTML tags
+        return self.flash_msg.text_content()
 
 
-'''
-Function: performs login action.
-'''
-def perform_login(self, username: str, password: str):
-    self.username_input.fill(username)      #fill in username field
-    self.password_input.fill(password)      #fill in password field
-    self.login_button.click()               #click login button
+    #performs login action.
+    def perform_login(self, username: str, password: str):
+        self.username_input.fill(username)      #fill in username field
+        self.password_input.fill(password)      #fill in password field
+        self.login_button.click()               #click login button
