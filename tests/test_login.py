@@ -6,7 +6,7 @@
 from playwright.sync_api import Page
 
 #import object model
-from pages.login_page import LoginPage
+from framework.pages.login_page import LoginPage
 
 
 '''
@@ -27,7 +27,7 @@ def test_valid_login(page: Page):
     assert page.locator("text=You logged into a secure area!").is_visible()
 
 '''
-Test Case: verify user can log in unsuccessfully with unvalid credentials.
+Test Case: verify user cannot log in with invalid credentials.
 Negative Path
 '''
 def test_invalid_login(page: Page):
@@ -40,7 +40,7 @@ def test_invalid_login(page: Page):
     #performs login action: fill username and password, click login button
     login_page.perform_login("tommysmoth", "SecretPassword!")
 
-    #verify success message appears
+    #verify invalid message appears
     assert page.locator("text=Your username is invalid").is_visible()
 
 
