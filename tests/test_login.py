@@ -5,11 +5,13 @@
 #library imports
 from playwright.sync_api import Page
 
+#import object model
+from pages.login_page import LoginPage
+
+
 '''
 Test Case: verify user can log in successfully with valid credentials.
-args:
-    page - 
-
+Positive Path
 '''
 def test_valid_login(page: Page):
     #navigate to browser login page of demo website
@@ -28,7 +30,10 @@ def test_valid_login(page: Page):
     #assert that the success message is visible, if false, test fails.
     assert success_message.is_visible()
 
-
+'''
+Test Case: verify user can log in unsuccessfully with unvalid credentials.
+Negative Path
+'''
 def test_invalid_login(page: Page):
     #navigate to browser login page of demo website
     page.goto("https://the-internet.herokuapp.com/login")
