@@ -6,7 +6,7 @@
 from playwright.sync_api import Page
 
 #import object model
-from pages.login_page import LoginPage
+from ..pages.login_page import LoginPage
 
 
 '''
@@ -14,42 +14,33 @@ Test Case: verify user can log in successfully with valid credentials.
 Positive Path
 '''
 def test_valid_login(page: Page):
+    #create page object
+    login_page = LoginPage(page)
+    
     #navigate to browser login page of demo website
-    page.goto("https://the-internet.herokuapp.com/login")
+    login_page.open_browser()
 
-    page.fill("#username", "tomsmith")              #fills username input field using CSS selector
-    page.fill("#password", "SuperSecretPassword!")  #fills password input field using CSS selector
+    #performs login action: fill username and password, click login button
+    login_page.perform_login("tomsmith", "SuperSecretPassword!")
 
-    #selector finds and clicks button element that submits login form
-    page.click("button[type='submit']")
-
-    #verify that the success message appears after logging in
-    #playwright's locater finds success text on page
-    success_message = page.locator("text=You logged into a secure area!")
-
-    #assert that the success message is visible, if false, test fails.
-    assert success_message.is_visible()
+    #verify success message appears
+    assert page.locator("text=You logged into a secure area!").is_visible()
 
 '''
 Test Case: verify user can log in unsuccessfully with unvalid credentials.
 Negative Path
 '''
 def test_invalid_login(page: Page):
+    #create page object
+    login_page = LoginPage(page)
+    
     #navigate to browser login page of demo website
-    page.goto("https://the-internet.herokuapp.com/login")
+    login_page.open_browser()
 
-    #wrong information
-    page.fill("#username", "tommysmith")            #fills username input field using CSS selector
-    page.fill("#password", "SecretPassword!")       #fills password input field using CSS selector
+    #performs login action: fill username and password, click login button
+    login_page.perform_login("tommysmoth", "SecretPassword!")
 
-    #selector finds and clicks button element that submits login form
-    page.click("button[type='submit']")
-
-    #verify that the error message appears after logging in
-    #playwright's locater finds error text on page
-    error_message = page.locator("text=Your username is invalid!")
-
-    #assert that the success message is visible, if false, test fails.
-    assert error_message.is_visible()
+    #verify success message appears
+    assert page.locator("text=Your username is invalid").is_visible()
 
 
